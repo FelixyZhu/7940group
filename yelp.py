@@ -121,7 +121,7 @@ def get_business(api_key, business_id):
 
     return request(API_HOST, business_path, api_key)
 
-
+'''PREVIOUS WASTED query_api FUNCTION CALL:
 def query_api(term, location):
     """Queries the API by the input values from the user.
 
@@ -147,8 +147,7 @@ def query_api(term, location):
     print(u'Result for business "{0}" found:'.format(business_id))
     pprint.pprint(response, indent=2)
 
-
-'''TO BY MODIFY:
+'''
 def query_api(term, location):
     """Queries the API by the input values from the user and displays more results.
 
@@ -160,6 +159,9 @@ def query_api(term, location):
 
     businesses = response.get('businesses')
 
+    first_business_id = businesses[0]['id']
+
+
     if not businesses:
         print(u'No businesses for {0} in {1} found.'.format(term, location))
         return
@@ -167,8 +169,11 @@ def query_api(term, location):
     print(u'{0} businesses found for "{1}" in "{2}":'.format(len(businesses), term, location))
 
     # Display the top 5 businesses or the total number of businesses found if less than 5
-    for business in businesses[:5]:
-        print(u'Business ID: {0}, Name: {1}'.format(business['id'], business['name']))'''
+    for business in businesses[:]:
+        print(u'Business ID: {0}, Name: {1}'.format(business['id'], business['name'], ))
+    
+    print(u'Result for business "{0}" found:'.format(first_business_id))
+    pprint.pprint(response, indent=2)
 
 def main():
     parser = argparse.ArgumentParser()
@@ -191,7 +196,6 @@ def main():
                 error.read(),
             )
         )
-
 
 if __name__ == '__main__':
     main()
